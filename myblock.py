@@ -17,21 +17,6 @@ for yy in range(4):
 page = "play"
 score = 0
 
-## データのリセット
-def gamereset():
-    global vx, vy
-    global score
-    global blocks
-    vx = random.randint(-10, 10)
-    vy = -5
-    ballrect.x = 400
-    ballrect.y = 450
-    score = 0
-    blocks = []
-    for yy in range(4):
-        for xx in range(7):
-            blocks.append(pg.Rect(xx*100+50, yy*50+40, 80, 30))
-
 def gamestage():
     global vx, vy
     global score
@@ -62,7 +47,7 @@ def gamestage():
         ## ブロックとボールが衝突したら、ボールを跳ね返してブロックを消す
         if block.colliderect(ballrect):
             vy = -vy
-            blocks[n] = pg.Rect(0,0,0,0) # TODO これ副作用なくしたいな
+            blocks[n] = pg.Rect(0,0,0,0)
             score += 1
             if score == 28:
                 page = "gameclear"
@@ -70,7 +55,6 @@ def gamestage():
 
 ## ゲームオーバー
 def gameover():
-    gamereset()
     screen.fill(pg.Color("NAVY"))
     font = pg.font.Font(None, 150)
     text = font.render("GAMEOVER", True, pg.Color("RED"))
@@ -78,7 +62,6 @@ def gameover():
 
 ## ゲームクリア
 def gameclear():
-    gamereset()
     screen.fill(pg.Color("GOLD"))
     font = pg.font.Font(None, 150)
     text = font.render("GAMECLEAR", True, pg.Color("RED"))
