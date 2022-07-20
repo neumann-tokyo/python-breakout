@@ -16,9 +16,9 @@ def gamestage():
     # 背景
     screen.fill(pg.Color("NAVY"))
     # マウスの位置
-    # (mx, my) = pg.mouse.get_pos()
+    (mx, my) = pg.mouse.get_pos()
     # バーを表示
-    # barrect.x = mx - 50
+    barrect.x = mx - 50
     pg.draw.rect(screen, pg.Color("CYAN"), barrect)
     # ボールを表示
     pg.draw.circle(screen, pg.Color("CYAN"), [ballrect.x, ballrect.y], ballrect.width)
