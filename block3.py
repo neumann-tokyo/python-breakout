@@ -31,7 +31,6 @@ def button_to_jump(btn, newpage):
     (mx, my) = pg.mouse.get_pos()
     if mdown[0]:
         if btn.collidepoint(mx, my) and pushFlag == False:
-            pg.mixer.Sound("sounds/pi.wav").play()
             page = newpage
             pushFlag = True
     else:
@@ -56,12 +55,10 @@ def gamestage():
     if ballrect.x < 0 or ballrect.x > 800 - 30:
         vx = -vx
     if barrect.colliderect(ballrect):
-        vx = ((ballrect.x + 15) - (barrect.x + 50))  / 4
+        vx = ((ballrect.x + 15) - (barrect.x + 50)) / 4
         vy = random.randint(-10, -5)
-        pg.mixer.Sound("sounds/pon.wav").play()
     if ballrect.y > 600:
         page = 2
-        pg.mixer.Sound("sounds/down.wav").play()
     ballrect.x += vx
     ballrect.y += vy
     screen.blit(ballimg, ballrect)
@@ -71,12 +68,10 @@ def gamestage():
         pg.draw.rect(screen, pg.Color("GOLD"), block)
         ## ブロックとボールが衝突したら、ボールを跳ね返してブロックを消す
         if block.colliderect(ballrect):
-            pg.mixer.Sound("sounds/piko.wav").play()
             vy = -vy
             blocks[n] = pg.Rect(0,0,0,0)
             score += 1
             if score == 28:
-                pg.mixer.Sound("sounds/up.wav").play()
                 page = 3
         n += 1
 
