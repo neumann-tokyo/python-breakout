@@ -1,9 +1,10 @@
 import pygame as pg, sys
-import random
 pg.init()
 screen = pg.display.set_mode((800, 600))
 barrect = pg.Rect(400, 500, 100, 20)
 ballrect = pg.Rect(400, 450, 10, 10)
+vx = 8
+vy = -8
 blocks = []
 for yy in range(4):
     for xx in range(7):
@@ -14,6 +15,8 @@ def gamestage():
     (mx, my) = pg.mouse.get_pos()
     barrect.x = mx - 50
     pg.draw.rect(screen, pg.Color("CYAN"), barrect)
+    ballrect.x += vx
+    ballrect.y += vy
     pg.draw.circle(screen, pg.Color("CYAN"), [ballrect.x, ballrect.y], ballrect.width)
     for block in blocks:
         pg.draw.rect(screen, pg.Color("GOLD"), block)
