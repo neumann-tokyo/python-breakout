@@ -10,10 +10,12 @@ for yy in range(4):
     for xx in range(7):
         blocks.append(pg.Rect(50+xx*100, 40+yy*50, 80, 30))
 page = "play"
+score = 0
 
 def gamestage():
     global vx, vy
     global page
+    global score
     screen.fill(pg.Color("NAVY"))
     (mx, my) = pg.mouse.get_pos()
     barrect.x = mx - 50
@@ -35,6 +37,9 @@ def gamestage():
         if block.colliderect(ballrect):
             vy = -vy
             blocks[n] = pg.Rect(0,0,0,0)
+            score += 1
+            if score == 28:
+                page = "gameclear"
         n += 1
 
 def gameover():
@@ -43,11 +48,19 @@ def gameover():
     text = font.render("GAMEOVER", True, pg.Color("RED"))
     screen.blit(text, (100, 200))
 
+def gameclear():
+    screen.fill(pg.Color("GOLD"))
+    font = pg.font.Font(None, 150)
+    text = font.render("GAMECLEAR", True, pg.Color("RED"))
+    screen.blit(text, (60, 200))
+
 while True:
     if page == "play":
         gamestage()
     elif page == "gameover":
         gameover()
+    else:
+        gameclear()
     pg.display.update()
     pg.time.Clock().tick(60)
     for event in pg.event.get():
