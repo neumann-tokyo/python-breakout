@@ -11,10 +11,17 @@ for yy in range(4):
         blocks.append(pg.Rect(50+xx*100, 40+yy*50, 80, 30))
 
 def gamestage():
+    global vx, vy
     screen.fill(pg.Color("NAVY"))
     (mx, my) = pg.mouse.get_pos()
     barrect.x = mx - 50
     pg.draw.rect(screen, pg.Color("CYAN"), barrect)
+    if ballrect.y < 0:
+        vy = -vy
+    if ballrect.x < 0 or ballrect.x > 800 - 10:
+        vx = -vx
+    if barrect.colliderect(ballrect):
+        vy = -vy
     ballrect.x += vx
     ballrect.y += vy
     pg.draw.circle(screen, pg.Color("CYAN"), [ballrect.x, ballrect.y], ballrect.width)
