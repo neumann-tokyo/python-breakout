@@ -25,8 +25,13 @@ def gamestage():
     ballrect.x += vx
     ballrect.y += vy
     pg.draw.circle(screen, pg.Color("CYAN"), [ballrect.x, ballrect.y], ballrect.width)
+    n = 0
     for block in blocks:
         pg.draw.rect(screen, pg.Color("GOLD"), block)
+        if block.colliderect(ballrect):
+            vy = -vy
+            blocks[n] = pg.Rect(0,0,0,0)
+        n += 1
 
 while True:
     gamestage()
